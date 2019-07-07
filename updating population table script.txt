@@ -1,0 +1,47 @@
+DECLARE
+cursor city is select distinct city_id from FACT_NUM_OF_CASES;
+vcured number;
+ycounter number:=5;
+vdeathes number;
+acounter number:=1;
+vut number ;
+gcounter number :=1;
+cityid number;
+ccounter number :=1;
+YEARR NUMBER;
+totalsum number;
+begin
+open city;
+loop 
+fetch city into cityid;
+loop
+YEARR:=YCOUNTER+2000;
+loop
+loop
+
+select sum (deathes) , sum(under_treatment) , sum(cured) into vdeathes , vut , vcured from FACT_NUM_OF_CASES where city_id=cityid and year=YEARR and age_id=acounter and gender_id=gcounter;
+totalsum := vdeathes + vut + vcured;
+
+update FACT_POPULATION
+set deathes =vdeathes , cured =vcured , under_treatment =vut , total = totalsum
+where city_id=cityid and year=YEARR and age_range_id=acounter and gender=gcounter;
+
+gcounter:=gcounter+1;
+exit when(gcounter =3);
+end loop;
+gcounter:=1;
+acounter :=acounter+1;
+exit when(acounter =7);
+end loop;
+acounter:=1;
+ycounter := ycounter+1;
+exit when (ycounter =16);
+end loop;
+ycounter :=5;
+ccounter := ccounter+1;
+exit when(ccounter =2308);
+end loop;
+close city;
+end;
+
+

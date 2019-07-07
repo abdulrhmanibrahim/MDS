@@ -1,0 +1,514 @@
+DECLARE
+cursor doc is select doctor_id from doctors;
+cursor dis is select disease_id from diseases;
+cursor dc is select disease_cause_id from disease_cause_jt;
+doctor number;
+var_1 number;
+var_2 number;
+var_3 number;
+var_4 number;
+var_5 number;
+var_6 number;
+var_7 number;
+counter1 number:=0;
+counter2 number:=0;
+counter3 number:=0;
+disease number;
+var_dc number;
+r1 pls_integer;
+r2 pls_integer;
+rcured pls_integer;
+rdeath pls_integer;
+rtreat pls_integer;
+var_season_year number:=1;
+begin
+open doc;
+loop /* 1 */
+fetch doc into doctor;
+open dis;
+loop /* 2*/
+fetch dis into disease;
+select department_id into var_2 from hospital_department where hospital_dep_id=(select hospital_dep_fk from doctors where doctor_id=doctor);
+select department_fk into var_1 from diseases where disease_id=disease;
+if var_1 = var_2 then
+open dc;
+loop /*3*/
+fetch dc into var_dc;
+select disease_fk into var_3 from disease_cause_jt where disease_cause_id=var_dc;
+if var_3 =disease then
+select curable into var_5 from diseases where disease_id=disease;
+select fatal into var_6 from diseases where disease_id=disease;
+select TREATMENT_PROCESS into var_7 from diseases where disease_id=disease;
+select dbms_random.value(0,9) into r1 from dual;
+if r1<7 then
+loop /*4*/
+select child into var_4 from diseases where disease_id=disease;
+if var_4=1 then
+
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,1,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,1,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,2,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,2,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,3,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,3,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,4,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,4,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,5,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,5,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,6,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,6,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+
+else 
+
+if var_1=4 then
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,2,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,3,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,4,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,5,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,6,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+
+else 
+
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,2,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,2,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,3,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,3,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,4,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,4,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,5,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,5,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,6,var_season_year,rtreat+rcured+rdeath,1,rtreat,rcured,rdeath);
+end if;
+select dbms_random.value(0,9) into r2 from dual;
+if r2<4 then
+select dbms_random.value(0,5) into rdeath from dual;
+select dbms_random.value(0,5) into rtreat from dual;
+select dbms_random.value(0,5) into rcured from dual;
+if var_5=0 then
+rcured:=0;
+end if;
+if var_6=0 then
+rdeath:=0;
+end if;
+if var_7=0 then
+rtreat:=0;
+end if;
+insert into cases(doctor_id,DISEASE_CAUSE_ID,AGE_RANGE_ID,SEASON_YEAR_ID,OBSERVED,GENDER_ID,UNDER_TREATMENT,CURED,DEATHES) values(doctor,var_dc,6,var_season_year,rtreat+rcured+rdeath,2,rtreat,rcured,rdeath);
+end if;
+end if;
+
+
+end if;
+
+var_season_year:=var_season_year+1;
+exit when(var_season_year =45);
+end loop;/*4*/
+var_season_year:=1;
+end if;
+end if;
+counter3:=counter3+1;
+exit when(counter3=341);
+end loop; /*3*/
+close dc;
+end if;
+counter2:=counter2+1;
+exit when(counter2=57);
+end loop;/*2*/
+close dis;
+counter2:=0;
+counter:=counter1+1;
+exit when(counter1=189290); /*189290*/
+end loop;  /* 1 */
+close doc;
+end;
